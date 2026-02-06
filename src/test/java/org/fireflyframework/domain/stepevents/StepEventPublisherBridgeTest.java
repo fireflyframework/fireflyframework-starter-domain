@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Firefly Software Solutions Inc
+ * Copyright 2024-2026 Firefly Software Solutions Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.firefly.common.domain.stepevents;
+package org.fireflyframework.domain.stepevents;
 
-import com.firefly.common.eda.publisher.EventPublisher;
-import com.firefly.transactional.saga.events.StepEventEnvelope;
+import org.fireflyframework.eda.publisher.EventPublisher;
+import org.fireflyframework.transactional.saga.events.StepEventEnvelope;
 import lombok.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -18,7 +18,7 @@ firefly:
 # Logging configuration for tests
 logging:
   level:
-    com.firefly: DEBUG
+    org.fireflyframework: DEBUG
     org.springframework: WARN
     reactor: WARN
   pattern:

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Firefly Software Solutions Inc
+ * Copyright 2024-2026 Firefly Software Solutions Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.firefly.common.domain.config;
+package org.fireflyframework.domain.config;
 
-import com.firefly.common.domain.stepevents.StepEventPublisherBridge;
-import com.firefly.common.eda.publisher.EventPublisherFactory;
+import org.fireflyframework.domain.stepevents.StepEventPublisherBridge;
+import org.fireflyframework.eda.publisher.EventPublisherFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Primary;
  * Auto-configuration for SAGA Step Event Bridge.
  * <p>
  * This configuration creates a bridge between lib-transactional-engine's StepEventPublisher
- * and lib-common-eda's EventPublisher, allowing SAGA step events to be published through
+ * and fireflyframework-eda's EventPublisher, allowing SAGA step events to be published through
  * the unified EDA infrastructure.
  */
 @Slf4j
@@ -43,7 +43,7 @@ public class StepBridgeConfiguration {
     /**
      * Creates the StepEventPublisherBridge bean.
      * <p>
-     * This bridge uses the default EDA publisher configured in lib-common-eda to publish
+     * This bridge uses the default EDA publisher configured in fireflyframework-eda to publish
      * step events. The destination topic is configured via firefly.stepevents.topic property.
      *
      * @param publisherFactory the EDA event publisher factory

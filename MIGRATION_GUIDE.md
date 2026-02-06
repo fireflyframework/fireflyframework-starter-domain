@@ -1,11 +1,11 @@
-# Migration Guide: lib-common-domain v2.0
+# Migration Guide: fireflyframework-domain v2.0
 
 ## Overview
 
 Version 2.0 introduces significant architectural changes to improve modularity and separation of concerns:
 
-1. **CQRS Extraction**: CQRS functionality moved to `lib-common-cqrs`
-2. **Event Infrastructure Migration**: Event publishing/consumption moved to `lib-common-eda`
+1. **CQRS Extraction**: CQRS functionality moved to `fireflyframework-cqrs`
+2. **Event Infrastructure Migration**: Event publishing/consumption moved to `fireflyframework-eda`
 3. **SAGA Integration**: Simplified to focus on bridging step events to EDA infrastructure
 
 This separation provides:
@@ -16,24 +16,24 @@ This separation provides:
 
 ## What Changed
 
-### 1. CQRS Migration (to lib-common-cqrs)
+### 1. CQRS Migration (to fireflyframework-cqrs)
 
-CQRS classes have moved from `com.firefly.common.domain.*` to `com.firefly.common.cqrs.*`:
+CQRS classes have moved from `org.fireflyframework.domain.*` to `org.fireflyframework.cqrs.*`:
 
 | Old Package | New Package |
 |------------|-------------|
-| `com.firefly.common.domain.command.*` | `com.firefly.common.cqrs.command.*` |
-| `com.firefly.common.domain.query.*` | `com.firefly.common.cqrs.query.*` |
-| `com.firefly.common.domain.authorization.*` | `com.firefly.common.cqrs.authorization.*` |
-| `com.firefly.common.domain.validation.*` | `com.firefly.common.cqrs.validation.*` |
-| `com.firefly.common.domain.annotations.*` | `com.firefly.common.cqrs.annotations.*` |
-| `com.firefly.common.domain.config.Cqrs*` | `com.firefly.common.cqrs.config.*` |
+| `org.fireflyframework.domain.command.*` | `org.fireflyframework.cqrs.command.*` |
+| `org.fireflyframework.domain.query.*` | `org.fireflyframework.cqrs.query.*` |
+| `org.fireflyframework.domain.authorization.*` | `org.fireflyframework.cqrs.authorization.*` |
+| `org.fireflyframework.domain.validation.*` | `org.fireflyframework.cqrs.validation.*` |
+| `org.fireflyframework.domain.annotations.*` | `org.fireflyframework.cqrs.annotations.*` |
+| `org.fireflyframework.domain.config.Cqrs*` | `org.fireflyframework.cqrs.config.*` |
 
-### 2. Event Infrastructure Migration (to lib-common-eda)
+### 2. Event Infrastructure Migration (to fireflyframework-eda)
 
-All event publishing and consumption functionality has been removed from `lib-common-domain` and should now use `lib-common-eda`:
+All event publishing and consumption functionality has been removed from `fireflyframework-domain` and should now use `fireflyframework-eda`:
 
-| Removed from lib-common-domain | Use Instead (lib-common-eda) |
+| Removed from fireflyframework-domain | Use Instead (fireflyframework-eda) |
 |-------------------------------|------------------------------|
 | `DomainEventPublisher` | `EventPublisher` |
 | `DomainEvent` interface | Plain POJOs with `Event<T>` wrapper |
@@ -47,15 +47,15 @@ All event publishing and consumption functionality has been removed from `lib-co
 The SAGA integration has been simplified:
 - **Removed**: Direct SAGA orchestration (use `lib-transactional-engine`)
 - **Kept**: `StepEventPublisherBridge` - bridges step events to EDA infrastructure
-- **Changed**: Now uses `lib-common-eda` for event publishing instead of internal infrastructure
+- **Changed**: Now uses `fireflyframework-eda` for event publishing instead of internal infrastructure
 
 ## Maven Dependencies
 
 **Before (v1.x):**
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-domain</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-domain</artifactId>
     <version>1.x.x</version>
 </dependency>
 ```
@@ -64,22 +64,22 @@ The SAGA integration has been simplified:
 ```xml
 <!-- Core domain library with CQRS and SAGA integration -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-domain</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-domain</artifactId>
     <version>2.0.0-SNAPSHOT</version>
-    <!-- lib-common-cqrs is included transitively -->
+    <!-- fireflyframework-cqrs is included transitively -->
 </dependency>
 
 <!-- Event-driven architecture (required for event publishing) -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-eda</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-eda</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
 <!-- SAGA orchestration (optional, only if using SAGAs) -->
 <dependency>
-    <groupId>com.firefly</groupId>
+    <groupId>org.fireflyframework</groupId>
     <artifactId>lib-transactional-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
@@ -92,16 +92,16 @@ The SAGA integration has been simplified:
 Add the new dependencies to your `pom.xml`:
 
 ```xml
-<!-- Add lib-common-eda for event publishing -->
+<!-- Add fireflyframework-eda for event publishing -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-eda</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-eda</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
 <!-- Add lib-transactional-engine if using SAGAs -->
 <dependency>
-    <groupId>com.firefly</groupId>
+    <groupId>org.fireflyframework</groupId>
     <artifactId>lib-transactional-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
@@ -113,21 +113,21 @@ Update all CQRS-related imports in your codebase:
 
 ```java
 // OLD imports
-import com.firefly.common.domain.command.*;
-import com.firefly.common.domain.query.*;
-import com.firefly.common.domain.authorization.*;
-import com.firefly.common.domain.annotations.*;
+import org.fireflyframework.domain.command.*;
+import org.fireflyframework.domain.query.*;
+import org.fireflyframework.domain.authorization.*;
+import org.fireflyframework.domain.annotations.*;
 
 // NEW imports
-import com.firefly.common.cqrs.command.*;
-import com.firefly.common.cqrs.query.*;
-import com.firefly.common.cqrs.authorization.*;
-import com.firefly.common.cqrs.annotations.*;
+import org.fireflyframework.cqrs.command.*;
+import org.fireflyframework.cqrs.query.*;
+import org.fireflyframework.cqrs.authorization.*;
+import org.fireflyframework.cqrs.annotations.*;
 ```
 
 ### Step 3: Migrate Event Publishing Code
 
-Replace `DomainEventPublisher` with `EventPublisher` from lib-common-eda:
+Replace `DomainEventPublisher` with `EventPublisher` from fireflyframework-eda:
 
 **Before:**
 ```java
@@ -212,7 +212,7 @@ firefly:
 **After:**
 ```yaml
 firefly:
-  # Event publishing configuration (lib-common-eda)
+  # Event publishing configuration (fireflyframework-eda)
   eda:
     enabled: true
     default-publisher-type: KAFKA
@@ -236,8 +236,8 @@ mvn clean test
 ### Step 7: Update Documentation References
 
 Update any internal documentation or comments that reference:
-- Domain events in lib-common-domain → point to lib-common-eda
-- CQRS in lib-common-domain → point to lib-common-cqrs
+- Domain events in fireflyframework-domain → point to fireflyframework-eda
+- CQRS in fireflyframework-domain → point to fireflyframework-cqrs
 - SAGA orchestration → point to lib-transactional-engine
 
 ## Compatibility
@@ -246,32 +246,32 @@ Update any internal documentation or comments that reference:
 
 - **CQRS Configuration**: All CQRS configuration properties remain unchanged
 - **CQRS Functionality**: All CQRS features work exactly as before
-- **Integration**: lib-common-domain still depends on lib-common-cqrs transitively
+- **Integration**: fireflyframework-domain still depends on fireflyframework-cqrs transitively
 
 ### Breaking Changes
 
 #### 1. Package Names
-- **CQRS imports**: Must update from `com.firefly.common.domain.*` to `com.firefly.common.cqrs.*`
+- **CQRS imports**: Must update from `org.fireflyframework.domain.*` to `org.fireflyframework.cqrs.*`
 
 #### 2. Event Publishing API
-- **DomainEventPublisher removed**: Use `EventPublisher` from lib-common-eda
+- **DomainEventPublisher removed**: Use `EventPublisher` from fireflyframework-eda
 - **DomainEvent interface removed**: Use plain POJOs
 - **@EventHandler removed**: Use `@EventListener` with `Event<T>` parameter
-- **Event filtering**: Use lib-common-eda filtering capabilities
+- **Event filtering**: Use fireflyframework-eda filtering capabilities
 
 #### 3. Configuration Properties
-- **firefly.events.*** removed**: Use `firefly.eda.*` from lib-common-eda
+- **firefly.events.*** removed**: Use `firefly.eda.*` from fireflyframework-eda
 - **firefly.step-events.*** renamed**: Use `firefly.stepevents.*`
 
 #### 4. Dependencies
-- **lib-common-eda required**: Must add explicitly for event publishing
+- **fireflyframework-eda required**: Must add explicitly for event publishing
 - **lib-transactional-engine required**: Must add explicitly for SAGA orchestration
 
 #### 5. Removed Components
 - All domain event infrastructure (publishers, listeners, filters, adapters)
-- Event health indicators (moved to lib-common-eda)
-- Event metrics (moved to lib-common-eda)
-- Messaging platform adapters (moved to lib-common-eda)
+- Event health indicators (moved to fireflyframework-eda)
+- Event metrics (moved to fireflyframework-eda)
+- Messaging platform adapters (moved to fireflyframework-eda)
 
 ## Complete Migration Examples
 
@@ -281,9 +281,9 @@ Update any internal documentation or comments that reference:
 ```java
 package com.example.banking.commands;
 
-import com.firefly.common.domain.command.Command;
-import com.firefly.common.domain.command.CommandHandler;
-import com.firefly.common.domain.annotations.CommandHandlerComponent;
+import org.fireflyframework.domain.command.Command;
+import org.fireflyframework.domain.command.CommandHandler;
+import org.fireflyframework.domain.annotations.CommandHandlerComponent;
 
 @CommandHandlerComponent
 public class CreateAccountHandler extends CommandHandler<CreateAccountCommand, AccountResult> {
@@ -298,9 +298,9 @@ public class CreateAccountHandler extends CommandHandler<CreateAccountCommand, A
 ```java
 package com.example.banking.commands;
 
-import com.firefly.common.cqrs.command.Command;           // Changed
-import com.firefly.common.cqrs.command.CommandHandler;    // Changed
-import com.firefly.common.cqrs.annotations.CommandHandlerComponent; // Changed
+import org.fireflyframework.cqrs.command.Command;           // Changed
+import org.fireflyframework.cqrs.command.CommandHandler;    // Changed
+import org.fireflyframework.cqrs.annotations.CommandHandlerComponent; // Changed
 
 @CommandHandlerComponent
 public class CreateAccountHandler extends CommandHandler<CreateAccountCommand, AccountResult> {
@@ -341,7 +341,7 @@ public class OrderService {
 ```java
 @Service
 public class OrderService {
-    private final EventPublisher eventPublisher;  // Changed to lib-common-eda
+    private final EventPublisher eventPublisher;  // Changed to fireflyframework-eda
 
     public Mono<Order> createOrder(CreateOrderCommand command) {
         return processOrder(command)
@@ -442,13 +442,13 @@ firefly:
 # update-cqrs-imports.sh
 
 find . -type f -name "*.java" -exec sed -i '' \
-  -e 's/import com\.firefly\.common\.domain\.command\./import com.firefly.common.cqrs.command./g' \
-  -e 's/import com\.firefly\.common\.domain\.query\./import com.firefly.common.cqrs.query./g' \
-  -e 's/import com\.firefly\.common\.domain\.authorization\./import com.firefly.common.cqrs.authorization./g' \
-  -e 's/import com\.firefly\.common\.domain\.validation\./import com.firefly.common.cqrs.validation./g' \
-  -e 's/import com\.firefly\.common\.domain\.annotations\./import com.firefly.common.cqrs.annotations./g' \
-  -e 's/import com\.firefly\.common\.domain\.tracing\./import com.firefly.common.cqrs.tracing./g' \
-  -e 's/import com\.firefly\.common\.domain\.context\./import com.firefly.common.cqrs.context./g' \
+  -e 's/import com\.firefly\.common\.domain\.command\./import org.fireflyframework.cqrs.command./g' \
+  -e 's/import com\.firefly\.common\.domain\.query\./import org.fireflyframework.cqrs.query./g' \
+  -e 's/import com\.firefly\.common\.domain\.authorization\./import org.fireflyframework.cqrs.authorization./g' \
+  -e 's/import com\.firefly\.common\.domain\.validation\./import org.fireflyframework.cqrs.validation./g' \
+  -e 's/import com\.firefly\.common\.domain\.annotations\./import org.fireflyframework.cqrs.annotations./g' \
+  -e 's/import com\.firefly\.common\.domain\.tracing\./import org.fireflyframework.cqrs.tracing./g' \
+  -e 's/import com\.firefly\.common\.domain\.context\./import org.fireflyframework.cqrs.context./g' \
   {} \;
 
 echo "CQRS import statements updated!"
@@ -461,7 +461,7 @@ echo "CQRS import statements updated!"
 # update-event-imports.sh
 
 find . -type f -name "*.java" -exec sed -i '' \
-  -e 's/import com\.firefly\.common\.domain\.events\.DomainEventPublisher/import com.firefly.common.eda.publisher.EventPublisher/g' \
+  -e 's/import com\.firefly\.common\.domain\.events\.DomainEventPublisher/import org.fireflyframework.eda.publisher.EventPublisher/g' \
   -e 's/import com\.firefly\.common\.domain\.events\.DomainEvent/\/\/ MANUAL MIGRATION NEEDED: Remove DomainEvent interface/g' \
   -e 's/@EventHandler/@EventListener \/\/ MANUAL MIGRATION NEEDED: Update method signature to use Event<T>/g' \
   {} \;
@@ -503,7 +503,7 @@ echo "Run tests: mvn clean test"
 
 After running automated scripts, complete these manual steps:
 
-- [ ] Update `pom.xml` to add `lib-common-eda` dependency
+- [ ] Update `pom.xml` to add `fireflyframework-eda` dependency
 - [ ] Update `pom.xml` to add `lib-transactional-engine` dependency (if using SAGAs)
 - [ ] Review all event publishing code and add topic + headers parameters
 - [ ] Update event listener methods to use `Event<T>` wrapper
@@ -519,24 +519,24 @@ After running automated scripts, complete these manual steps:
 
 If you encounter any issues during migration:
 
-1. Check the [lib-common-domain README](README.md)
-2. Check the [lib-common-cqrs README](../lib-common-cqrs/README.md)
-3. Check the [lib-common-eda README](../lib-common-eda/README.md)
+1. Check the [fireflyframework-domain README](README.md)
+2. Check the [fireflyframework-cqrs README](../fireflyframework-cqrs/README.md)
+3. Check the [fireflyframework-eda README](../fireflyframework-eda/README.md)
 4. Check the [lib-transactional-engine README](../lib-transactional-engine/README.md)
 5. Contact the Firefly Platform Team
 
-## What's in lib-common-domain v2.0
+## What's in fireflyframework-domain v2.0
 
 The library now focuses on:
 
-- **CQRS Framework** (via lib-common-cqrs dependency):
+- **CQRS Framework** (via fireflyframework-cqrs dependency):
   - CommandBus and QueryBus
   - Handler auto-discovery
   - Validation and authorization
   - ExecutionContext and multi-tenancy
 
 - **SAGA Integration**:
-  - StepEventPublisherBridge (bridges to lib-common-eda)
+  - StepEventPublisherBridge (bridges to fireflyframework-eda)
   - Integration with lib-transactional-engine
 
 - **Observability**:
@@ -547,14 +547,14 @@ The library now focuses on:
 
 ## What Moved to Other Libraries
 
-- **Event Publishing** → `lib-common-eda`
+- **Event Publishing** → `fireflyframework-eda`
   - EventPublisher interface
   - Multi-platform support (Kafka, RabbitMQ, SQS, Kinesis)
   - Event listeners and handlers
   - Resilience patterns for events
   - Event health indicators and metrics
 
-- **Service Communication** → `lib-common-client`
+- **Service Communication** → `fireflyframework-client`
   - ServiceClient framework
   - REST and gRPC support
   - Circuit breakers and retries

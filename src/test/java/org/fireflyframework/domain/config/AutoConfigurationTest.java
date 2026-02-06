@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Firefly Software Solutions Inc
+ * Copyright 2024-2026 Firefly Software Solutions Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.firefly.common.domain.config;
+package org.fireflyframework.domain.config;
 
-import com.firefly.common.cqrs.command.CommandBus;
-import com.firefly.common.cqrs.config.CqrsAutoConfiguration;
-import com.firefly.common.cqrs.config.CqrsProperties;
-import com.firefly.common.cqrs.query.QueryBus;
-import com.firefly.common.cqrs.tracing.CorrelationContext;
-import com.firefly.common.domain.stepevents.StepEventPublisherBridge;
-import com.firefly.common.eda.publisher.EventPublisher;
-import com.firefly.common.eda.publisher.EventPublisherFactory;
+import org.fireflyframework.cqrs.command.CommandBus;
+import org.fireflyframework.cqrs.config.CqrsAutoConfiguration;
+import org.fireflyframework.cqrs.config.CqrsProperties;
+import org.fireflyframework.cqrs.query.QueryBus;
+import org.fireflyframework.cqrs.tracing.CorrelationContext;
+import org.fireflyframework.domain.stepevents.StepEventPublisherBridge;
+import org.fireflyframework.eda.publisher.EventPublisher;
+import org.fireflyframework.eda.publisher.EventPublisherFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;

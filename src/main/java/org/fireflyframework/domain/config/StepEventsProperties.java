@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Firefly Software Solutions Inc
+ * Copyright 2024-2026 Firefly Software Solutions Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.firefly.common.domain.config;
+package org.fireflyframework.domain.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,7 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Configuration properties for SAGA Step Events.
  * <p>
- * Step Events from lib-transactional-engine are published through lib-common-eda's
+ * Step Events from lib-transactional-engine are published through fireflyframework-eda's
  * EventPublisher infrastructure via the StepEventPublisherBridge. This allows step
  * events to leverage all EDA features including multi-platform support, resilience
  * patterns, metrics, and health checks.
@@ -46,7 +46,7 @@ public class StepEventsProperties {
      * <p>
      * This topic will be used when a step event doesn't specify its own topic.
      * The actual messaging platform (Kafka, RabbitMQ, etc.) is determined by
-     * the lib-common-eda configuration.
+     * the fireflyframework-eda configuration.
      * <p>
      * Default: "step-events"
      */

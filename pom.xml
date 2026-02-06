@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.firefly</groupId>
-        <artifactId>lib-parent-pom</artifactId>
+        <groupId>org.fireflyframework</groupId>
+        <artifactId>fireflyframework-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
-    <artifactId>lib-common-domain</artifactId>
+    <artifactId>fireflyframework-domain</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Firefly Common Domain Library</name>
+    <name>Firefly Framework - Common Domain Library</name>
     <description>A powerful Spring Boot library that enables domain-driven design (DDD) with reactive programming support, featuring CQRS, SAGA orchestration, and service client capabilities.</description>
 
     <dependencies>
@@ -33,9 +33,9 @@
 
         <!-- Firefly Commons Validators -->
         <dependency>
-            <groupId>com.firefly</groupId>
-            <artifactId>lib-commons-validators</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.fireflyframework</groupId>
+            <artifactId>fireflyframework-validators</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Spring AOP -->
@@ -121,30 +121,30 @@
 
         <!-- Transactional Engine -->
         <dependency>
-            <groupId>com.firefly</groupId>
-            <artifactId>lib-transactional-engine</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.fireflyframework</groupId>
+            <artifactId>fireflyframework-transactional-engine</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
-        <!-- lib-common-cqrs for CQRS pattern support -->
+        <!-- fireflyframework-cqrs for CQRS pattern support -->
         <dependency>
-            <groupId>com.firefly</groupId>
-            <artifactId>lib-common-cqrs</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.fireflyframework</groupId>
+            <artifactId>fireflyframework-cqrs</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
-        <!-- lib-common-client for service client support -->
+        <!-- fireflyframework-client for service client support -->
         <dependency>
-            <groupId>com.firefly</groupId>
-            <artifactId>lib-common-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.fireflyframework</groupId>
+            <artifactId>fireflyframework-client</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
-        <!-- lib-common-eda for event-driven architecture support -->
+        <!-- fireflyframework-eda for event-driven architecture support -->
         <dependency>
-            <groupId>com.firefly</groupId>
-            <artifactId>lib-common-eda</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.fireflyframework</groupId>
+            <artifactId>fireflyframework-eda</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

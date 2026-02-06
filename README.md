@@ -1,4 +1,4 @@
-# lib-common-domain
+# fireflyframework-domain
 
 **A comprehensive Spring Boot library for domain-driven design (DDD) with CQRS and SAGA orchestration support.**
 
@@ -8,16 +8,16 @@
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-domain</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-domain</artifactId>
     <version>2.0.0-SNAPSHOT</version>
-    <!-- lib-common-cqrs is included transitively -->
+    <!-- fireflyframework-cqrs is included transitively -->
 </dependency>
 
 <!-- For event-driven architecture features -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-eda</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-eda</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -31,17 +31,17 @@ The framework auto-configures when detected on the classpath:
 public class MyApplication {
     public static void main(String[] args) {
         SpringApplication.run(MyApplication.class, args);
-        // ✅ CQRS features available via lib-common-cqrs
+        // ✅ CQRS features available via fireflyframework-cqrs
         // ✅ SAGA step event bridge configured
         // ✅ Distributed tracing is enabled
-        // ✅ Event publishing available via lib-common-eda
+        // ✅ Event publishing available via fireflyframework-eda
     }
 }
 ```
 
-### Publishing Events with lib-common-eda
+### Publishing Events with fireflyframework-eda
 
-For event publishing, use the `lib-common-eda` library:
+For event publishing, use the `fireflyframework-eda` library:
 
 ```java
 @Service
@@ -76,21 +76,21 @@ public class AccountService {
 
 ### Service Client Support
 
-For service-to-service communication, use the dedicated `lib-common-client` library:
+For service-to-service communication, use the dedicated `fireflyframework-client` library:
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-client</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-client</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-See the [lib-common-client documentation](../lib-common-client/README.md) for comprehensive service client usage.
+See the [fireflyframework-client documentation](../fireflyframework-client/README.md) for comprehensive service client usage.
 
 ## 🎯 Features
 
-### 🎯 CQRS Framework (via lib-common-cqrs)
+### 🎯 CQRS Framework (via fireflyframework-cqrs)
 - **Command & Query Separation**: Clear separation of write and read operations
 - **Handler Auto-Discovery**: Automatic registration of command and query handlers
 - **Validation**: Jakarta Bean Validation integration
@@ -100,19 +100,19 @@ See the [lib-common-client documentation](../lib-common-client/README.md) for co
 
 ### 🔄 SAGA Orchestration Integration
 - **lib-transactional-engine**: Native integration with saga orchestration
-- **Step Event Bridge**: Automatic saga step event publishing via lib-common-eda
+- **Step Event Bridge**: Automatic saga step event publishing via fireflyframework-eda
 - **Metadata Enrichment**: Context propagation through saga steps
-- **EDA Integration**: Leverages lib-common-eda for reliable event delivery
+- **EDA Integration**: Leverages fireflyframework-eda for reliable event delivery
 
-### 📡 Event-Driven Architecture (via lib-common-eda)
-For event publishing and consumption, use the dedicated `lib-common-eda` library:
+### 📡 Event-Driven Architecture (via fireflyframework-eda)
+For event publishing and consumption, use the dedicated `fireflyframework-eda` library:
 - **Multi-Platform Support**: Kafka, RabbitMQ, AWS SQS/Kinesis, Spring Events
 - **Reactive Streams**: Non-blocking event publishing and consumption
 - **Resilience Patterns**: Circuit breakers, retries, rate limiting
 - **Health Monitoring**: Real-time messaging platform health checks
 - **Metrics**: Comprehensive event publishing and consumption metrics
 
-### 🌍 ExecutionContext (via lib-common-cqrs)
+### 🌍 ExecutionContext (via fireflyframework-cqrs)
 - **Context Propagation**: Pass additional data not part of domain objects
 - **Multi-Tenancy**: Tenant isolation and context awareness
 - **Feature Flags**: Dynamic feature enablement
@@ -125,9 +125,9 @@ For event publishing and consumption, use the dedicated `lib-common-eda` library
 - **Distributed Tracing**: Zipkin/Jaeger integration
 - **Structured Logging**: JSON logging with correlation context
 
-## 📖 Event-Driven Architecture with lib-common-eda
+## 📖 Event-Driven Architecture with fireflyframework-eda
 
-For event publishing and consumption, this library integrates with `lib-common-eda`. See the [lib-common-eda documentation](../lib-common-eda/README.md) for:
+For event publishing and consumption, this library integrates with `fireflyframework-eda`. See the [fireflyframework-eda documentation](../fireflyframework-eda/README.md) for:
 
 - **Supported Messaging Platforms**: Kafka, RabbitMQ, AWS SQS, AWS Kinesis, Spring Application Events
 - **Configuration Options**: Platform-specific configuration
@@ -179,12 +179,12 @@ public class OrderService {
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                  lib-common-domain Architecture                                             │
+│                                  fireflyframework-domain Architecture                                             │
 ├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                                             │
 │  ┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐                              │
 │  │   CQRS Framework    │    │   SAGA Integration  │    │   Observability     │                              │
-│  │  (lib-common-cqrs)  │    │                     │    │                     │                              │
+│  │  (fireflyframework-cqrs)  │    │                     │    │                     │                              │
 │  │ ┌─────────────────┐ │    │ ┌─────────────────┐ │    │ ┌─────────────────┐ │                              │
 │  │ │ CommandBus      │ │    │ │ Step Event      │ │    │ │ Metrics         │ │                              │
 │  │ │ QueryBus        │ │    │ │ Bridge          │ │    │ │ Collection      │ │                              │
@@ -195,7 +195,7 @@ public class OrderService {
 │  │ └─────────────────┘ │    │ └─────────────────┘ │    │ └─────────────────┘ │                              │
 │  │ ┌─────────────────┐ │    │ ┌─────────────────┐ │    │ ┌─────────────────┐ │                              │
 │  │ │ Validation      │ │    │ │ EDA Integration │ │    │ │ Distributed     │ │                              │
-│  │ │ Authorization   │ │    │ │ (lib-common-eda)│ │    │ │ Tracing         │ │                              │
+│  │ │ Authorization   │ │    │ │ (fireflyframework-eda)│ │    │ │ Tracing         │ │                              │
 │  │ └─────────────────┘ │    │ └─────────────────┘ │    │ └─────────────────┘ │                              │
 │  │ ┌─────────────────┐ │    │ ┌─────────────────┐ │    │ ┌─────────────────┐ │                              │
 │  │ │ ExecutionContext│ │    │ │ Saga Events     │ │    │ │ JSON Logging    │ │                              │
@@ -207,7 +207,7 @@ public class OrderService {
 │  │                          External Dependencies                                                        │   │
 │  │                                                                                                       │   │
 │  │  ┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐                      │   │
-│  │  │  lib-common-eda     │    │ lib-transactional-  │    │  lib-common-client  │                      │   │
+│  │  │  fireflyframework-eda     │    │ lib-transactional-  │    │  fireflyframework-client  │                      │   │
 │  │  │                     │    │      engine         │    │                     │                      │   │
 │  │  │ ┌─────────────────┐ │    │ ┌─────────────────┐ │    │ ┌─────────────────┐ │                      │   │
 │  │  │ │ EventPublisher  │ │    │ │ StepEventPubl.  │ │    │ │ ServiceClient   │ │                      │   │
@@ -223,19 +223,19 @@ public class OrderService {
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 📡 Event Publishing with lib-common-eda
+## 📡 Event Publishing with fireflyframework-eda
 
-For event publishing and consumption, use the dedicated `lib-common-eda` library:
+For event publishing and consumption, use the dedicated `fireflyframework-eda` library:
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-eda</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-eda</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-The `lib-common-eda` library provides:
+The `fireflyframework-eda` library provides:
 - **Multi-Platform Support**: Kafka, RabbitMQ, AWS SQS, AWS Kinesis, Spring Application Events
 - **Unified API**: Single EventPublisher interface for all platforms
 - **Reactive Streams**: Non-blocking event publishing and consumption
@@ -298,21 +298,21 @@ public class OrderEventHandler {
 }
 ```
 
-See the [lib-common-eda documentation](../lib-common-eda/README.md) for complete usage examples, configuration options, and advanced features.
+See the [fireflyframework-eda documentation](../fireflyframework-eda/README.md) for complete usage examples, configuration options, and advanced features.
 
 ## 🔗 Service Client Framework
 
-For service-to-service communication, use the dedicated `lib-common-client` library:
+For service-to-service communication, use the dedicated `fireflyframework-client` library:
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-client</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-client</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-The `lib-common-client` library provides:
+The `fireflyframework-client` library provides:
 - **Unified API**: Single interface for REST and gRPC communication
 - **Circuit Breakers**: Built-in resilience patterns
 - **Reactive Programming**: Non-blocking operations with Spring WebFlux
@@ -320,28 +320,28 @@ The `lib-common-client` library provides:
 - **Request/Response Interceptors**: Extensible request processing
 - **Type Safety**: Strong typing with support for generic types
 
-See the [lib-common-client documentation](../lib-common-client/README.md) for complete usage examples and configuration options.
+See the [fireflyframework-client documentation](../fireflyframework-client/README.md) for complete usage examples and configuration options.
 
 
 
 ## 🔄 SAGA Orchestration Integration
 
-This library provides integration between `lib-transactional-engine` (SAGA orchestration) and `lib-common-eda` (event publishing).
+This library provides integration between `lib-transactional-engine` (SAGA orchestration) and `fireflyframework-eda` (event publishing).
 
 ### Dependencies
 
 ```xml
 <!-- SAGA orchestration -->
 <dependency>
-    <groupId>com.firefly</groupId>
+    <groupId>org.fireflyframework</groupId>
     <artifactId>lib-transactional-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
 <!-- Event publishing -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-eda</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-eda</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -368,7 +368,7 @@ firefly:
 The bridge automatically:
 1. Receives step events from `lib-transactional-engine` via the `StepEventPublisher` interface
 2. Enriches events with metadata (saga ID, transaction ID, step name, status)
-3. Publishes events through `lib-common-eda`'s `EventPublisher` to your configured messaging platform
+3. Publishes events through `fireflyframework-eda`'s `EventPublisher` to your configured messaging platform
 
 ### SAGA Implementation Example
 
@@ -423,7 +423,7 @@ Headers automatically added:
 ```yaml
 # application.yml
 firefly:
-  # CQRS Configuration (from lib-common-cqrs)
+  # CQRS Configuration (from fireflyframework-cqrs)
   cqrs:
     enabled: true
     command:
@@ -438,7 +438,7 @@ firefly:
     enabled: true  # Default: true
     topic: saga-step-events  # Default: step-events
 
-  # Event-Driven Architecture (from lib-common-eda)
+  # Event-Driven Architecture (from fireflyframework-eda)
   eda:
     enabled: true
     default-publisher-type: KAFKA  # KAFKA, RABBIT, SQS, KINESIS, APPLICATION_EVENT
@@ -471,9 +471,9 @@ FIREFLY_EDA_ENABLED=true
 FIREFLY_EDA_DEFAULT_PUBLISHER_TYPE=KAFKA
 ```
 
-### Event Publishing Configuration (lib-common-eda)
+### Event Publishing Configuration (fireflyframework-eda)
 
-For detailed event publishing configuration, see the [lib-common-eda documentation](../lib-common-eda/README.md).
+For detailed event publishing configuration, see the [fireflyframework-eda documentation](../fireflyframework-eda/README.md).
 
 #### Kafka Configuration
 ```yaml
@@ -530,7 +530,7 @@ management:
 
 ### Available Metrics
 
-#### CQRS Metrics (from lib-common-cqrs)
+#### CQRS Metrics (from fireflyframework-cqrs)
 - `firefly.cqrs.command.executed.total` - Total commands executed
 - `firefly.cqrs.command.execution.duration` - Command execution time
 - `firefly.cqrs.query.executed.total` - Total queries executed
@@ -538,7 +538,7 @@ management:
 - `firefly.cqrs.query.cache.hits` - Query cache hits
 - `firefly.cqrs.query.cache.misses` - Query cache misses
 
-#### Event Publishing Metrics (from lib-common-eda)
+#### Event Publishing Metrics (from fireflyframework-eda)
 - `firefly.eda.events.published.total` - Total events published
 - `firefly.eda.events.publishing.duration` - Event publishing time
 - `firefly.eda.events.consumed.total` - Total events consumed
@@ -569,7 +569,7 @@ The library provides health indicators for SAGA step event bridge:
 }
 ```
 
-For EDA health indicators (Kafka, RabbitMQ, SQS, Kinesis), see the [lib-common-eda documentation](../lib-common-eda/README.md#observability).
+For EDA health indicators (Kafka, RabbitMQ, SQS, Kinesis), see the [fireflyframework-eda documentation](../fireflyframework-eda/README.md#observability).
 
 ## 🧪 Testing
 
@@ -678,44 +678,44 @@ class StepEventPublisherBridgeTest {
 }
 ```
 
-### Testing with lib-common-eda
+### Testing with fireflyframework-eda
 
-For event publishing and consumption testing, see the [lib-common-eda testing documentation](../lib-common-eda/README.md#testing).
+For event publishing and consumption testing, see the [fireflyframework-eda testing documentation](../fireflyframework-eda/README.md#testing).
 
-## 🔄 Integration with lib-common-cqrs
+## 🔄 Integration with fireflyframework-cqrs
 
-For CQRS functionality, use `lib-common-cqrs` alongside this library:
+For CQRS functionality, use `fireflyframework-cqrs` alongside this library:
 
 ```xml
 <!-- For domain layer capabilities -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-domain</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-domain</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
 
 <!-- For CQRS capabilities -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-cqrs</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-cqrs</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
 <!-- For service client capabilities -->
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-client</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-client</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-**What you get from lib-common-cqrs:**
+**What you get from fireflyframework-cqrs:**
 - CommandBus and QueryBus: Central dispatching for commands and queries
 - Handler Annotations: @CommandHandlerComponent and @QueryHandlerComponent
 - ExecutionContext: Context propagation for tenant isolation and cross-cutting concerns
 - Automatic Validation: Jakarta Bean Validation integration
 - Query Caching: Intelligent caching with configurable TTL
-- Authorization Framework: Integration with lib-common-auth
+- Authorization Framework: Integration with fireflyframework-cqrs authorization
 - Metrics and Tracing: Built-in observability for CQRS operations
 
 **Combined Usage Example:**
@@ -723,13 +723,13 @@ For CQRS functionality, use `lib-common-cqrs` alongside this library:
 @Service
 public class BankingOrchestrationService {
     
-    private final CommandBus commandBus;           // From lib-common-cqrs
-    private final QueryBus queryBus;              // From lib-common-cqrs  
-    private final DomainEventPublisher eventPublisher; // From lib-common-domain
-    private final ServiceClient paymentService;   // From lib-common-client
+    private final CommandBus commandBus;           // From fireflyframework-cqrs
+    private final QueryBus queryBus;              // From fireflyframework-cqrs  
+    private final DomainEventPublisher eventPublisher; // From fireflyframework-domain
+    private final ServiceClient paymentService;   // From fireflyframework-client
     
     public Mono<TransferResult> processTransfer(TransferRequest request) {
-        // ExecutionContext is from lib-common-cqrs
+        // ExecutionContext is from fireflyframework-cqrs
         ExecutionContext context = ExecutionContext.builder()
             .userId(request.getUserId())
             .tenantId(request.getTenantId())
@@ -782,7 +782,7 @@ public class BankingOrchestrationService {
 }
 ```
 
-> **Note**: For ExecutionContext usage patterns, authorization, caching, and CQRS handler development, see the [lib-common-cqrs documentation](../lib-common-cqrs/README.md).
+> **Note**: For ExecutionContext usage patterns, authorization, caching, and CQRS handler development, see the [fireflyframework-cqrs documentation](../fireflyframework-cqrs/README.md).
 
 ## 🤝 Contributing
 
@@ -794,7 +794,7 @@ public class BankingOrchestrationService {
 
 ## 📜 License
 
-Copyright 2025 Firefly Software Solutions Inc
+Copyright 2024-2026 Firefly Software Solutions Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
